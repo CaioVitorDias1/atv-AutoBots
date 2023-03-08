@@ -16,6 +16,7 @@ import com.autobots.sistema.entities.Cliente;
 import com.autobots.sistema.models.AtualizarCliente;
 import com.autobots.sistema.models.SelecionarCliente;
 import com.autobots.sistema.repositories.ClienteRepository;
+import com.autobots.sistema.services.ClienteService;
 
 
 
@@ -28,6 +29,9 @@ public class ClienteController {
 
     @Autowired
     private SelecionarCliente selecionarCliente;
+
+    @Autowired
+    private ClienteService clienteService;
 
 
     // DÚVIDAS
@@ -57,8 +61,13 @@ public class ClienteController {
 
     @PostMapping("/cadastrar")
     public void cadastrar(@RequestBody Cliente cliente){
-        clienteRepository.save(cliente);
+        clienteService.cadastrarCliente(cliente);
     }
+
+    /*@PostMapping("/cadastrar")
+    public void cadastrar(@RequestBody Cliente cliente){
+        clienteRepository.save(cliente);
+    }*/
 
     @PutMapping("/alterar")
     public void atualizarCliente(@RequestBody Cliente newCliente){
