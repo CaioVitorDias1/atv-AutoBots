@@ -46,18 +46,30 @@ public class ClienteController {
      */
 
 
-    @GetMapping("/obter")
+    /*@GetMapping("/obter")
     public List<Cliente> puxarCLientes(){
         List<Cliente> clientes = clienteRepository.findAll();
         return clientes;
+    }*/
+
+    @GetMapping("/obter")
+    public List<Cliente> pegarClientes(){
+        List<Cliente> todosClientes = clienteService.pegarTodosClientes();
+        return todosClientes;
     }
     
-    @GetMapping("/obter/{id}")
+    /*@GetMapping("/obter/{id}")
     public Cliente obterCliente(@PathVariable Long id){
         List<Cliente> clientes = clienteRepository.findAll();
         return selecionarCliente.selecionar(clientes, id);
-    }
+    }*/
 
+
+    @GetMapping("/obter/{id}")
+    public Cliente obterCliente(@PathVariable Long id){
+        Cliente cliente = clienteService.pegarClientePorId(id);
+        return cliente; 
+    }
 
     @PostMapping("/cadastrar")
     public void cadastrar(@RequestBody Cliente cliente){
@@ -69,17 +81,27 @@ public class ClienteController {
         clienteRepository.save(cliente);
     }*/
 
-    @PutMapping("/alterar")
+    /*@PutMapping("/alterar")
     public void atualizarCliente(@RequestBody Cliente newCliente){
         Cliente cliente = clienteRepository.getReferenceById(newCliente.getId());
         AtualizarCliente atualizarCliente = new AtualizarCliente();
         atualizarCliente.atualizar(cliente, newCliente);
         clienteRepository.save(cliente);
+    }*/
+
+    @PutMapping("/alterar")
+    public void atualizarCliente(@RequestBody Cliente novoCliente){
+        clienteService.atualizarCliente(novoCliente);
     }
 
-    @DeleteMapping("/deletar")
+    /*@DeleteMapping("/deletar")
     public void excluirCliente(@RequestBody Cliente excluir){
         Cliente cliente = clienteRepository.getReferenceById(excluir.getId());
         clienteRepository.delete(cliente);
+    }*/
+
+    @DeleteMapping("/deletar")
+    public void excluirCliente(@RequestBody Cliente excluir){
+        clienteService.deletarCliente(excluir);
     }
 }
