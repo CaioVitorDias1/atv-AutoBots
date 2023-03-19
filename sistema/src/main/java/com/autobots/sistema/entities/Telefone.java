@@ -14,6 +14,10 @@ public class Telefone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
+    @Column()
+    private Long idCliente;
+
     @Column
     private String ddd;
 

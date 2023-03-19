@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -32,10 +33,12 @@ public class Cliente {
     @Column
     private Date dataCadastro = new Date();
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCliente")
     private List<Documento> documentos = new ArrayList<>();
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private Endereco endereco;
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCliente")
     private List<Telefone> telefones = new ArrayList<>();
     
 }
