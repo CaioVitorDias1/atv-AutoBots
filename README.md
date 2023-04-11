@@ -22,3 +22,17 @@ Depois de elaborado todo as operções de CRUD das entidades faltentes, e melhor
 ### Regras de negócio 
 
 * Implementar na aplicação: Protocolo http, uri única por recurso, Uso dos métodos e suas semânticas e Hateoas.
+
+## ATV3
+
+### Resumo
+
+Depois de contemplado os níveis de maturidade, o objetivo agora é adicionar novas funcionalidades à aplicação, como o registro de usuários, serviços, veiculos e peças de forma que também contemplem os níveis de maturidade.
+
+### Regras de negócio
+
+* Cadastro de empresas
+* Cadastro de veículos
+* Associação de usuário à uma empresa
+* Definição dos tipos de usuários
+* Credenciais de acesso para os usuários
