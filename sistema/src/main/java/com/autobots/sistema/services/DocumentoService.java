@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.autobots.sistema.entities.Documento;
 import com.autobots.sistema.models.AtualizarDocumento;
+import com.autobots.sistema.models.hateoas.DocumentoHateoas;
 import com.autobots.sistema.repositories.DocumentoRepository;
 
 @Service
@@ -19,9 +20,13 @@ public class DocumentoService {
     @Autowired
     private AtualizarDocumento atualizarDocumento;
 
+    @Autowired
+    private DocumentoHateoas documentoHateoas;
+
     public List<Documento> pegarTodos(){
-        List<Documento> telefones = documentoRepository.findAll();
-        return telefones;
+        List<Documento> documentos = documentoRepository.findAll();
+        documentoHateoas.addLinkLista(documentos);
+        return documentos;
     }
 
     public Documento pegarUm(@PathVariable Long id){
@@ -35,6 +40,7 @@ public class DocumentoService {
             return documentoBuscado = documentoABuscar;
 
         };
+        documentoHateoas.addLink(documentoBuscado);
         return documentoBuscado;
     }
 

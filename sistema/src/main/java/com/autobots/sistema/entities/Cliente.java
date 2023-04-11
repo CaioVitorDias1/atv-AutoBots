@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.hateoas.RepresentationModel;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,9 +21,10 @@ import lombok.Data;
 
 
 
+
 @Data
 @Entity
-public class Cliente {
+public class Cliente extends RepresentationModel<Cliente>{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
