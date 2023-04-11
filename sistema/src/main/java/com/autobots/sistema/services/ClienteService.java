@@ -3,6 +3,7 @@ package com.autobots.sistema.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class ClienteService {
 
     public void cadastrarCliente (@RequestBody Cliente cliente){
         clienteRepository.save(cliente);
+        
     }
 
     public List<Cliente> pegarTodosClientes(){

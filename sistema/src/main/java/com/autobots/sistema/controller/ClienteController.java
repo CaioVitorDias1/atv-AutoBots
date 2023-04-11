@@ -3,6 +3,8 @@ package com.autobots.sistema.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.autobots.sistema.entities.Cliente;
 import com.autobots.sistema.models.AtualizarCliente;
 import com.autobots.sistema.models.SelecionarCliente;
+import com.autobots.sistema.models.hateoas.ClienteHateaos;
 import com.autobots.sistema.repositories.ClienteRepository;
 import com.autobots.sistema.services.ClienteService;
 
@@ -32,6 +35,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private ClienteHateaos clienteHateaos;
 
 
     // DÚVIDAS
@@ -55,6 +61,7 @@ public class ClienteController {
     @GetMapping("/obter")
     public List<Cliente> pegarClientes(){
         List<Cliente> todosClientes = clienteService.pegarTodosClientes();
+        clienteHateaos.addLinkLista(todosClientes);
         return todosClientes;
     }
     
@@ -68,6 +75,7 @@ public class ClienteController {
     @GetMapping("/obter/{id}")
     public Cliente obterCliente(@PathVariable Long id){
         Cliente cliente = clienteService.pegarClientePorId(id);
+        clienteHateaos.addLink(cliente);
         return cliente; 
     }
 

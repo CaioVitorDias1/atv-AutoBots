@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.autobots.sistema.entities.Telefone;
 import com.autobots.sistema.models.AtualizarTelefone;
+import com.autobots.sistema.models.hateoas.TelefoneHateoas;
 import com.autobots.sistema.repositories.TelefoneRepository;
 
 @Service
@@ -20,8 +21,12 @@ public class TelefoneService {
     @Autowired
     private AtualizarTelefone atualizarTelefone;
 
+    @Autowired
+    private TelefoneHateoas telefoneHateoas;
+
     public List<Telefone> pegarTodos(){
         List<Telefone> telefones = telefoneRepository.findAll();
+        telefoneHateoas.addLinkLista(telefones);
         return telefones;
     }
 
@@ -36,6 +41,7 @@ public class TelefoneService {
             return telefoneBuscado = telefoneABuscar;
 
         };
+        telefoneHateoas.addLink(telefoneBuscado);
         return telefoneBuscado;
     }
 

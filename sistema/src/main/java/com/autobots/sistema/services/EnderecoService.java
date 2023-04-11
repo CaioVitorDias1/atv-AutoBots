@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.autobots.sistema.entities.Endereco;
 import com.autobots.sistema.models.AtualizarEndereco;
+import com.autobots.sistema.models.hateoas.EnderecoHateoas;
 import com.autobots.sistema.repositories.EnderecoRepository;
 
 @Service
@@ -20,9 +21,13 @@ public class EnderecoService {
     @Autowired
     private AtualizarEndereco atualizarEndereco;
 
+    @Autowired
+    private EnderecoHateoas enderecoHateoas;
+
     public List<Endereco> pegarTodos(){
-        List<Endereco> telefones = enderecoRepository.findAll();
-        return telefones;
+        List<Endereco> enderecos = enderecoRepository.findAll();
+        enderecoHateoas.addLinkLista(enderecos);
+        return enderecos;
     }
 
     public Endereco pegarUm(@PathVariable Long id){
@@ -36,6 +41,7 @@ public class EnderecoService {
             return enderecoBuscado = enderecoABuscar;
 
         };
+        enderecoHateoas.addLink(enderecoBuscado);
         return enderecoBuscado;
     }
 
