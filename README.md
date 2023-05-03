@@ -36,3 +36,15 @@ Depois de contemplado os níveis de maturidade, o objetivo agora é adicionar no
 * Associação de usuário à uma empresa
 * Definição dos tipos de usuários
 * Credenciais de acesso para os usuários
+
+## ATV4
+
+### Resumo
+
+Com as funcionalidades em pronto, o que falta agora para a "equipe" é atualizar o processo de autenticação para usar o JWT, e definir 
+as devidas autorizações para os tipos certos de usuários em cada rota.
+
+### Regras de negócio
+
+* Aplicação do controle de acesso 
+* Atualização para autenticação JWT
