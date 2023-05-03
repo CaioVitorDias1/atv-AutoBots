@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.autobots.sistema.entities.Cliente;
+import com.autobots.sistema.entities.Usuario;
 import com.autobots.sistema.models.AtualizarCliente;
 import com.autobots.sistema.models.SelecionarCliente;
 import com.autobots.sistema.models.hateoas.ClienteHateaos;
 import com.autobots.sistema.repositories.ClienteRepository;
+import com.autobots.sistema.repositories.UsuarioRepository;
 import com.autobots.sistema.services.ClienteService;
 
 
@@ -28,7 +31,7 @@ import com.autobots.sistema.services.ClienteService;
 public class ClienteController {
     
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private SelecionarCliente selecionarCliente;
@@ -64,6 +67,15 @@ public class ClienteController {
         clienteHateaos.addLinkLista(todosClientes);
         return todosClientes;
     }
+
+    // @GetMapping("/gerarUser")
+    // public void gerarUser(){
+    //      Usuario user = new Usuario();
+    //      user.setUserEmail("user@gmail.com");
+    //      user.setSenha(new BCryptPasswordEncoder().encode("senha"));
+    //      usuarioRepository.save(user);
+        
+    // }
     
     /*@GetMapping("/obter/{id}")
     public Cliente obterCliente(@PathVariable Long id){
