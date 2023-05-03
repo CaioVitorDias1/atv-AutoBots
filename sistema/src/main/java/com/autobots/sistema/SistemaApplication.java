@@ -33,7 +33,8 @@ public class SistemaApplication implements CommandLineRunner{
 		usuario.setNome("caio");
 		usuario.setUserEmail("caio@gmail.com");
 		usuario.setSenha(passwordEncoder.encode("senha"));
-		usuario.setTipoUser(TipoUser.FUNCIONARIO);
+		usuario.setTipoUser(TipoUser.CLIENTE);
+		usuario.setCargo("ADMINISTRADOR");
 		usuarioRepository.save(usuario);
 	}
 

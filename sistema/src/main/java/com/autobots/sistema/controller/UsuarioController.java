@@ -3,6 +3,7 @@ package com.autobots.sistema.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +28,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/")
     public Usuario login(@RequestBody Usuario usuario){
        String password = passwordEncoder.encode(usuario.getSenha());
@@ -36,6 +38,7 @@ public class UsuarioController {
         return usuario;
     } 
 
+    @PreAuthorize("hasAnyRole('CLIENTE', 'VENDEDOR', 'GERENTE' 'ADMINISTRADOR')")
     @GetMapping("/all")
     public List<Usuario> users(){
         return usuarioRepository.findAll();

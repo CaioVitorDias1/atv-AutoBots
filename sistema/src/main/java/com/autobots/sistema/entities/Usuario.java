@@ -38,6 +38,9 @@ public class Usuario implements UserDetails{
     @Column(nullable = false)
     private String senha;
 
+    @Column(nullable = false)
+    private String cargo;
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Endereco endereco;
     
@@ -61,7 +64,7 @@ public class Usuario implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of( new SimpleGrantedAuthority(tipoUser.toString()));
+        return List.of( new SimpleGrantedAuthority(cargo));
     }
 
     @Override
