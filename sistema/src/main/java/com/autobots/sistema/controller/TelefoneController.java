@@ -54,6 +54,7 @@ public class TelefoneController {
         return telefoneService.pegarTodos();
     };
 
+    @PreAuthorize("hasAnyRole('CLIENTE', 'VENDEDOR', 'GERENTE' 'ADMINISTRADOR')")
     @GetMapping("/pegar/{id}")
     public Telefone pegarTelefone(@PathVariable Long id){
         return telefoneService.pegarUm(id);

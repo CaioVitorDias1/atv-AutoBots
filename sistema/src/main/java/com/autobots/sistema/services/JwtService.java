@@ -29,5 +29,22 @@ public class JwtService {
     private Claims extractClaims(String jwtToken, String secret){
         return Jwts.parserBuilder().setSigningKey(getSignINKey(secret)).build().parseClaimsJws(jwtToken).getBody();
     }
+
+    public Boolean isNotTokenExpired(String jwtToken, String secret){
+        Claims claims = extractClaims(jwtToken, secret);
+        Date now = new Date(System.currentTimeMillis());
+        return now.before(claims.getExpiration());
+    } 
+
+    public String extractUsername(String jwtToken, String secret){
+        Claims claims = extractClaims(jwtToken, secret);
+        String username = claims.getSubject();
+        return username;
+    }
+
+    public Boolean validateToken(String jwtToken, String secret, String usernName){
+        String subject = extractUsername(jwtToken, secret);
+        return (subject.equals(usernName) && isNotTokenExpired(jwtToken, secret));
+    }
     
 }
