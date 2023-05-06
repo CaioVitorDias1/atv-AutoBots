@@ -48,3 +48,17 @@ as devidas autorizações para os tipos certos de usuários em cada rota.
 
 * Aplicação do controle de acesso 
 * Atualização para autenticação JWT
+
+## ATV5
+
+### Resumo
+
+Para finalizar, a próxima etapa é a criação de uma API separada que fará comunicação com o sistema automanager. Essa API
+possuirá novas funcionalidades que se relacionarão com o sistema.
+
+### Regras de negócio
+
+* Listagem de todos os clientes e funcionários
+* Listagem de mercadorias e serviços disponéveis 
+* Listagem de todos os serviços e peças por empresa
+* Listagemd dos veículos atendidos por empresa
