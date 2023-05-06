@@ -3,6 +3,7 @@ package com.autobots.sistema.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,28 +48,33 @@ public class TelefoneController {
     @Autowired
     private TelefoneService telefoneService;
 
+    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @GetMapping("/todos")
     public List<Telefone> pegarTelefones(){
         return telefoneService.pegarTodos();
     };
 
+    @PreAuthorize("hasAnyRole('CLIENTE', 'VENDEDOR', 'GERENTE' 'ADMINISTRADOR')")
     @GetMapping("/pegar/{id}")
     public Telefone pegarTelefone(@PathVariable Long id){
         return telefoneService.pegarUm(id);
     }
 
+    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/cadastrar")
     public Telefone cadastrarTelefone(@RequestBody Telefone telefone){
         telefoneService.criarTelefone(telefone);
         return telefone;
     }
 
+    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PutMapping("/alterar")
     public Telefone alterarTelefone(@RequestBody Telefone telefone){
         telefoneService.atualizandoTelefone(telefone);
         return telefone;
     }
 
+    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @DeleteMapping("/deletar")
     public void deletarTelefone(@RequestBody Telefone deletarTel){
         telefoneService.deletandoTelefone(deletarTel);
