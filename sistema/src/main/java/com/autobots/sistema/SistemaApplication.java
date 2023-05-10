@@ -32,6 +32,8 @@ public class SistemaApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+
+
 		final String secret = "secreta";
 		final long duration = 9000000;
 
@@ -42,11 +44,14 @@ public class SistemaApplication implements CommandLineRunner{
 		usuario.setSenha(passwordEncoder.encode("senha"));
 		usuario.setTipoUser(TipoUser.CLIENTE);
 		usuario.setCargo("ADMINISTRADOR");
-		String jwtToken = jwtService.createToken(usuario.getUserEmail(), duration, secret);
-		jwtToken = "Bearear " + jwtToken;
-		AuthenticationModel userToken = new AuthenticationModel(jwtToken, usuario);
-		//authenticationManager.authenticate(userToken);
 		usuarioRepository.save(usuario);
+		
+		
+		// String jwtToken = jwtService.createToken(usuario.getUserEmail(), duration, secret);
+		// jwtToken = "Bearear " + jwtToken;
+		// AuthenticationModel userToken = new AuthenticationModel(jwtToken, usuario);
+		// //authenticationManager.authenticate(userToken);
+		// usuarioRepository.save(usuario);
 	}
 
 }

@@ -38,7 +38,7 @@ public class WebSecurityConfig {
         .httpBasic()
         .and()
         .authorizeHttpRequests()
-        .requestMatchers("/login/").permitAll()
+        .requestMatchers("/login/", "/join**").permitAll()
         //.antMatchers(HttpMethod.GET, "/parking-spot/**").permitAll()
         // .antMatchers(HttpMethod.POST, "/parking-spot/**").hasRole("USER")
         // .antMatchers(HttpMethod.DELETE, "/parking-spot/**").hasRole("ADMIN")
