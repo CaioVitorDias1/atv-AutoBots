@@ -17,7 +17,7 @@ public class VeiculoController {
     @Autowired
     private VeiculoService veiculoService;
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/create")
     public Veiculo cadastrarVeiculo(@RequestBody Veiculo veiculo){
         veiculoService.cadastrar(veiculo);

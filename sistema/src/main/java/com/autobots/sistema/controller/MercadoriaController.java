@@ -16,7 +16,7 @@ public class MercadoriaController {
     @Autowired
     private MercadoriaService mercadoriaService;
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/create")
     public Mercadoria cadastrarMercadoria(@RequestBody Mercadoria mercadoria){
     mercadoriaService.cadastrar(mercadoria);

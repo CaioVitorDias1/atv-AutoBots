@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,6 +62,7 @@ public class ClienteController {
         return clientes;
     }*/
 
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @GetMapping("/obter")
     public List<Cliente> pegarClientes(){
         List<Cliente> todosClientes = clienteService.pegarTodosClientes();
@@ -83,7 +85,7 @@ public class ClienteController {
         return selecionarCliente.selecionar(clientes, id);
     }*/
 
-
+    @PreAuthorize("hasAnyAuthority('CLIENTE', 'VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @GetMapping("/obter/{id}")
     public Cliente obterCliente(@PathVariable Long id){
         Cliente cliente = clienteService.pegarClientePorId(id);
@@ -91,6 +93,7 @@ public class ClienteController {
         return cliente; 
     }
 
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/cadastrar")
     public void cadastrar(@RequestBody Cliente cliente){
         clienteService.cadastrarCliente(cliente);
@@ -109,6 +112,7 @@ public class ClienteController {
         clienteRepository.save(cliente);
     }*/
 
+    @PreAuthorize("hasAnyAuthority('CLIENTE', 'VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PutMapping("/alterar")
     public void atualizarCliente(@RequestBody Cliente novoCliente){
         clienteService.atualizarCliente(novoCliente);
@@ -120,6 +124,7 @@ public class ClienteController {
         clienteRepository.delete(cliente);
     }*/
 
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @DeleteMapping("/deletar")
     public void excluirCliente(@RequestBody Cliente excluir){
         clienteService.deletarCliente(excluir);

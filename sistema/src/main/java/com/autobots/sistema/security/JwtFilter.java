@@ -23,44 +23,44 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Component
-public class JwtFilter extends OncePerRequestFilter{
+// @Component
+// public class JwtFilter extends OncePerRequestFilter{
 
-    // private final AuthenticationManager authenticationManager;
+//     // private final AuthenticationManager authenticationManager;
 
-    // public JwtFilter(AuthenticationManager authenticationManager) {
-    //     this.authenticationManager = authenticationManager;
-    // }
-    @Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
-    @Autowired
-    private JwtService jwtService;
-    @Autowired
-    private HeaderService headerService;
+//     // public JwtFilter(AuthenticationManager authenticationManager) {
+//     //     this.authenticationManager = authenticationManager;
+//     // }
+//     @Autowired
+//     private UserDetailsServiceImpl userDetailsServiceImpl;
+//     @Autowired
+//     private JwtService jwtService;
+//     @Autowired
+//     private HeaderService headerService;
 
-    String secret = "senhasecreta";
+//     String secret = "senhasecreta";
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        String header = headerService.extractHeader(request, "Authorization");
-        String jwtToken = headerService.extractJwtToken(header);
-        if(jwtToken != null){
-            String username = jwtService.extractUsername(jwtToken, secret);
-            if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
-                if(jwtService.validateToken(jwtToken, secret, username)){
-                    UsernamePasswordAuthenticationToken authenticationToken = 
-                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                }
-            }
-        } 
-        filterChain.doFilter(request, response);
-    }
+//     @Override
+//     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+//             throws ServletException, IOException {
+//         String header = headerService.extractHeader(request, "Authorization");
+//         String jwtToken = headerService.extractJwtToken(header);
+//         if(jwtToken != null){
+//             String username = jwtService.extractUsername(jwtToken, secret);
+//             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+//                 UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
+//                 if(jwtService.validateToken(jwtToken, secret, username)){
+//                     UsernamePasswordAuthenticationToken authenticationToken = 
+//                     new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+//                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+//                 }
+//             }
+//         } 
+//         filterChain.doFilter(request, response);
+//     }
 
    
     
     
-}
+// }

@@ -48,33 +48,33 @@ public class TelefoneController {
     @Autowired
     private TelefoneService telefoneService;
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @GetMapping("/todos")
     public List<Telefone> pegarTelefones(){
         return telefoneService.pegarTodos();
     };
 
-    @PreAuthorize("hasAnyRole('CLIENTE', 'VENDEDOR', 'GERENTE' 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('CLIENTE', 'VENDEDOR', 'GERENTE' ,'ADMINISTRADOR')")
     @GetMapping("/pegar/{id}")
     public Telefone pegarTelefone(@PathVariable Long id){
         return telefoneService.pegarUm(id);
     }
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/cadastrar")
     public Telefone cadastrarTelefone(@RequestBody Telefone telefone){
         telefoneService.criarTelefone(telefone);
         return telefone;
     }
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PutMapping("/alterar")
     public Telefone alterarTelefone(@RequestBody Telefone telefone){
         telefoneService.atualizandoTelefone(telefone);
         return telefone;
     }
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @DeleteMapping("/deletar")
     public void deletarTelefone(@RequestBody Telefone deletarTel){
         telefoneService.deletandoTelefone(deletarTel);

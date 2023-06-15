@@ -16,7 +16,7 @@ public class ServicoController {
     @Autowired
     private ServicoService servicoService;
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/create")
     public Servico cadastrarMercadoria(@RequestBody Servico servico){
     servicoService.cadastrar(servico);
