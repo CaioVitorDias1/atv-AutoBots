@@ -24,13 +24,13 @@ public class VendaController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE' 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @GetMapping("/vendas")
     public List<Venda> listar(){
         return vendaRepository.findAll();
     }
 
-    @PreAuthorize("hasAnyRole('CLIENTE', 'VENDEDOR', 'GERENTE' 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('CLIENTE', 'VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @GetMapping("/{id}")
     public List<Venda> listarVendasUser(@PathVariable Long id){
        Usuario user = usuarioRepository.getReferenceById(id);

@@ -17,41 +17,26 @@ import com.autobots.sistema.services.JwtService;
 
 @SpringBootApplication
 public class SistemaApplication implements CommandLineRunner{
+
+	@Autowired
+	private UsuarioRepository usuarioRepositorio;
+
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaApplication.class, args);
 	}
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
-	@Autowired
-	private JwtService jwtService;
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	
 
 	@Override
 	public void run(String... args) throws Exception {
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-
-
-		final String secret = "secreta";
-		final long duration = 9000000;
-
-
-		Usuario usuario = new Usuario();
-		usuario.setNome("caio");
-		usuario.setUserEmail("caio@gmail.com");
-		usuario.setSenha(passwordEncoder.encode("senha"));
-		usuario.setTipoUser(TipoUser.CLIENTE);
-		usuario.setCargo("ADMINISTRADOR");
-		usuarioRepository.save(usuario);
-		
-		
-		// String jwtToken = jwtService.createToken(usuario.getUserEmail(), duration, secret);
-		// jwtToken = "Bearear " + jwtToken;
-		// AuthenticationModel userToken = new AuthenticationModel(jwtToken, usuario);
-		// //authenticationManager.authenticate(userToken);
-		// usuarioRepository.save(usuario);
+		Usuario user = new Usuario();
+		user.setUserEmail("admin@gmail.com");
+		user.setNome("admin");
+		user.setTipoUser(TipoUser.FUNCIONARIO);
+		user.setSenha(passwordEncoder.encode("123"));
+		user.setCargo("ADMINISTRADOR");
+		usuarioRepositorio.save(user);
 	}
 
 }

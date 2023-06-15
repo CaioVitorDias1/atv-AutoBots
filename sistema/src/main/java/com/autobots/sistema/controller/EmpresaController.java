@@ -30,21 +30,21 @@ public class EmpresaController {
     @Autowired
     private EmpresaHateaos empresaHateaos;
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PostMapping("/create")
     public Empresa cadastrarEmpresa(@RequestBody Empresa empresa){
         empresaService.cadastrar(empresa);
         return empresa;
     }
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @PutMapping("/associarUsuario/{idEmpresa}")
     public Empresa associarUsuarioEmpresa(@PathVariable Long idEmpresa, @RequestBody Usuario usuario){
         Empresa empresaAtualizada = empresaService.associar(idEmpresa, usuario);
         return empresaAtualizada;
     }
 
-    @PreAuthorize("hasAnyRole('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
+    @PreAuthorize("hasAnyAuthority('VENDEDOR', 'GERENTE', 'ADMINISTRADOR')")
     @GetMapping("/todas")
     public List<Empresa> trazerTodas(){
         List<Empresa> todasEmpresas = empresaRepository.findAll();
